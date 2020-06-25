@@ -1,0 +1,113 @@
+#include <iostream>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h> 
+#include <unistd.h> 
+#include <iomanip> 
+
+using namespace std;
+
+void timer()
+{
+    int counter = 120; //amount of seconds
+    Sleep(1000);
+    while (counter >= 1)
+    {
+        cout << "\rTime remaining: " << counter << flush;
+        Sleep(1000);
+        counter--;
+    }
+}
+
+void executions(double total_money) {
+    char option, another_opt='y';
+    char logout = 'y';
+    int amt_withdraw;
+    int deposit, k;
+    
+        cout << "\n\t----------------------------------";
+        cout << "\n\t Please select an option ";
+        cout << "\n\t       A. Withdraw ";
+        cout << "\n\t       B. Deposit ";
+        cout << "\n\t       C. Balance ";
+        cout << "\n\t       F. Logout " << endl;
+        cout << "\n\t----------------------------------";
+        
+        cout << "\n\nEnter Your Option: ";
+        cin >> option;
+        switch(option) {
+            case 'A':
+                    cout << "\nHOW MUCH DO YOU WANT TO WITHDRAW?" << endl;
+                    cin >> amt_withdraw;
+                    if (amt_withdraw % 20 != 0) {
+                        cout << "\nPLEASE ENTER THE AMOUNT IN MULTIPLES OF 20." << endl;
+                    }
+                    else if  (amt_withdraw > total_money) {
+                        cout << "Unable to dispense full amount requested at this time." << endl;
+                    }
+                    else if (total_money == 0) {
+                        cout << "Unable to process your withdrawal at this time." << endl;
+                    }
+                    else if ((total_money - amt_withdraw) < 0) {
+                        cout << "Amount dispensed: " << amt_withdraw <<endl;
+                        cout << "You have been charged an overdraft fee of $5. Current balance: " << (total_money - 5) << endl;
+                    }
+                    else {
+                        total_money = total_money - amt_withdraw;
+                        cout << "Amount dispensed: " << amt_withdraw << endl;
+                        cout << "Current balance: " << total_money << endl;
+                    }
+                    break;
+            case 'B':
+                    cout << "Enter the amount you wish to deposit: ";
+                    cin >> deposit;
+                    total_money = total_money + deposit;
+                    cout << "\nCurrent Balance: " << total_money << endl;
+                    break;
+            case 'C':
+                    cout << "Current Balance: " << total_money << endl;
+                    break;
+            case 'D':
+                    cout << "Thank you for using TAKEOFF ATM." << endl;
+                    break;
+            default:
+                    cout << "INVALID OPTION!!!" << endl;
+        }
+    // return 0;
+}
+int main() {
+    timer();
+    
+    int pin, account_id;
+    cout << "WELCOME TO TAKEOFF ATM MACHINE" << endl;
+    // cout << "Please enter your account ID: " << endl;
+    // cin >> account_id;
+    cout << "Please enter your pin: " << endl;
+    cin >> pin;
+    
+    switch(pin) {
+        case 7386:
+                cout << "Account 2859459814 successfully authorized";
+                executions(10.98);
+                break;
+        case 4557:
+                cout << "Account 1434597300 successfully authorized";
+                executions(90000.55);
+                break;
+        case 5950:
+                cout << "Account 2001377812 successfully authorized";
+                executions(60.00);
+                break;
+        case 0075:
+                cout << "Account 7089382418 successfully authorized";
+                executions(0.00);
+                break;
+        
+        default:
+                cout << "Authorization failed!";
+    }
+        
+    
+    
+    return 0;
+}
