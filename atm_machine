@@ -7,6 +7,7 @@
 
 using namespace std;
 
+// function for the timer. For some reason it doesn't work with my IDE. I don't know if you can test with your IDE and see if it works
 void timer()
 {
     int counter = 120; //amount of seconds
@@ -19,9 +20,11 @@ void timer()
     }
 }
 
+//function to execute the tasks
 void executions(double total_money) {
-    char option, another_opt='y';
-    char logout = 'y';
+    
+    //variables declared for the tasks
+    char option;
     int amt_withdraw;
     int deposit, k;
     
@@ -30,12 +33,15 @@ void executions(double total_money) {
         cout << "\n\t       A. Withdraw ";
         cout << "\n\t       B. Deposit ";
         cout << "\n\t       C. Balance ";
-        cout << "\n\t       F. Logout " << endl;
+        cout << "\n\t       D. History ";
+        cout << "\n\t       E. Logout " << endl;
         cout << "\n\t----------------------------------";
         
-        cout << "\n\nEnter Your Option: ";
+        //Enter your options
+        cout << "\n\nEnter Your Option: (Please note your options should be in uppercase.)";
         cin >> option;
         switch(option) {
+            //for withdrawal tasks
             case 'A':
                     cout << "\nHOW MUCH DO YOU WANT TO WITHDRAW?" << endl;
                     cin >> amt_withdraw;
@@ -58,16 +64,19 @@ void executions(double total_money) {
                         cout << "Current balance: " << total_money << endl;
                     }
                     break;
+            //for deposit task
             case 'B':
                     cout << "Enter the amount you wish to deposit: ";
                     cin >> deposit;
                     total_money = total_money + deposit;
                     cout << "\nCurrent Balance: " << total_money << endl;
                     break;
+            //for checking balance
             case 'C':
                     cout << "Current Balance: " << total_money << endl;
                     break;
-            case 'D':
+            //to logout of the atm
+            case 'E':
                     cout << "Thank you for using TAKEOFF ATM." << endl;
                     break;
             default:
@@ -75,6 +84,8 @@ void executions(double total_money) {
         }
     // return 0;
 }
+
+//main function to execute the above functions
 int main() {
     timer();
     
@@ -85,6 +96,7 @@ int main() {
     cout << "Please enter your pin: " << endl;
     cin >> pin;
     
+    //switch to different accounts based on the pin
     switch(pin) {
         case 7386:
                 cout << "Account 2859459814 successfully authorized";
